@@ -25,7 +25,7 @@ class TodoListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for: indexPath)
-        var item = itemArray[indexPath.row]
+        let item = itemArray[indexPath.row]
         
         cell.textLabel?.text = item.title
         
@@ -34,16 +34,15 @@ class TodoListViewController: UITableViewController {
         
         return cell
     }
-    
-    //MARK - Tableview Delegate methods
+}
+
+// MARK: - Actions
+extension TodoListViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         itemArray[indexPath.row].done = !itemArray[indexPath.row].done
         tableView.deselectRow(at: indexPath, animated: true)
         saveItems()
     }
-    
-    //MARK - add new Items
-
     
     @IBAction func addItemPressed(_ sender: UIBarButtonItem) {
         
@@ -70,6 +69,11 @@ class TodoListViewController: UITableViewController {
         
         present(alert, animated: true, completion: nil)
     }
+}
+
+
+// MARK: - Fetch & Save Items
+extension TodoListViewController {
     
     func saveItems(){
         let encoder = PropertyListEncoder()
@@ -96,4 +100,3 @@ class TodoListViewController: UITableViewController {
         }
     }
 }
-
