@@ -13,6 +13,7 @@
 		6E0855C62773CF0B001C45B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E0855C42773CF0B001C45B1 /* Main.storyboard */; };
 		6E0855C82773CF0D001C45B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E0855C72773CF0D001C45B1 /* Assets.xcassets */; };
 		6E0855CB2773CF0D001C45B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E0855C92773CF0D001C45B1 /* LaunchScreen.storyboard */; };
+		6E4E169F27A85B0800EF5E7F /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4E169E27A85B0800EF5E7F /* CategoryViewController.swift */; };
 		6E4ECD08277E3C5E00C234E1 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6E4ECD06277E3C5E00C234E1 /* DataModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 		6E0855C72773CF0D001C45B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6E0855CA2773CF0D001C45B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6E0855CC2773CF0D001C45B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E4E169E27A85B0800EF5E7F /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		6E4ECD07277E3C5E00C234E1 /* ItemModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ItemModel.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -74,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				6E0855C22773CF0B001C45B1 /* TodoListViewController.swift */,
+				6E4E169E27A85B0800EF5E7F /* CategoryViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -167,6 +170,7 @@
 			files = (
 				6E0855C32773CF0B001C45B1 /* TodoListViewController.swift in Sources */,
 				6E4ECD08277E3C5E00C234E1 /* DataModel.xcdatamodeld in Sources */,
+				6E4E169F27A85B0800EF5E7F /* CategoryViewController.swift in Sources */,
 				6E0855BF2773CF0B001C45B1 /* AppDelegate.swift in Sources */,
 				6E0855C12773CF0B001C45B1 /* SceneDelegate.swift in Sources */,
 			);

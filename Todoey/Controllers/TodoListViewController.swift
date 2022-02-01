@@ -11,12 +11,16 @@ import CoreData
 class TodoListViewController: UITableViewController {
     
     var itemArray = [Item]()
+    var parentCategory: Category? {
+        didSet {
+            loadItems()
+        }
+    }
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadItems()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -62,6 +66,7 @@ extension TodoListViewController {
                     let newItem = Item(context: self.context)
                     newItem.title = safeText
                     newItem.done = false
+                    newItem.category = self.parentCategory
                     self.itemArray.append(newItem)
                     self.saveItems()
                 }
@@ -98,7 +103,16 @@ extension TodoListViewController {
         tableView.reloadData()
     }
     
-    func loadItems(with req: NSFetchRequest<Item> = Item.fetchRequest()){
+    func loadItems(with req: NSFetchRequest<Item> = Item.fetchRequest(), predicate: NSPredicate? = nil){
+        let categoryPredicate = NSPredicate(format: "category.name MATCHES %@", parentCategory!.name!)
+        
+        if let additionalPredicate = predicate {
+            req.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate,additionalPredicate])
+        }
+        else {
+            req.predicate = categoryPredicate
+        }
+        
         //        if  let data = try? Data(contentsOf: dataFilePath!) {
         //            let decoder = PropertyListDecoder()
         
@@ -106,19 +120,19 @@ extension TodoListViewController {
         do {
             itemArray = try context.fetch(req)
             //              itemArray = try decoder.decode([Item].self, from: data)
+            tableView.reloadData()
         }
-        catch{
+        catch {
             //                print("Error when decoding item Array: \(error)")
             print("Error when Fetching Items: \(error)")
         }
         //        }
-        tableView.reloadData()
     }
-
+    
 }
 
 
-// MARK: - SearchBarDelegare
+// MARK: - SearchBarDelegate
 extension TodoListViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -134,9 +148,9 @@ extension TodoListViewController: UISearchBarDelegate {
         else {
             if let searchText = searchBar.text {
                 let request: NSFetchRequest<Item> = Item.fetchRequest()
-                request.predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchText)
+                let searchPredicate = NSPredicate(format: "title CONTAINS[cd] %@", searchText)
                 request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
-                loadItems(with: request)
+                loadItems(with: request, predicate: searchPredicate)
             }
         }
     }
